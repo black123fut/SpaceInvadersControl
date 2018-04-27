@@ -14,6 +14,11 @@ public class Client extends AsyncTask<String, Void, Void> {
     private DataInputStream din;
     private static String received;
 
+    /**
+     * Manda un mensaje al servidor.
+     * @param voids Argumento por override.
+     * @return
+     */
     @Override
     protected Void doInBackground(String... voids) {
         String message = voids[0];
@@ -22,10 +27,13 @@ public class Client extends AsyncTask<String, Void, Void> {
             //172.18.195.176 tec
             //192.168.100.5 casa 192.168.100.6
             //172.18.42.103 biblioteca
-            socket = new Socket("192.168.100.6", 8000);
+            socket = new Socket("172.18.17.63", 8000);
+
+            //Manda mensaje al cliente.
             writter = new PrintWriter(socket.getOutputStream(), true);
             writter.write(message);
 
+            //Lee el mensaje del cliente.
             din = new DataInputStream(socket.getInputStream());
             received = din.readUTF();
 
@@ -38,7 +46,11 @@ public class Client extends AsyncTask<String, Void, Void> {
         return null;
     }
 
-    String getReceived(){
+    /**
+     * Obtiene el mensaje que fue enviado del servidor.
+     * @return El mensaje del servidor.
+     */
+    public String getReceived(){
         return received;
     }
 

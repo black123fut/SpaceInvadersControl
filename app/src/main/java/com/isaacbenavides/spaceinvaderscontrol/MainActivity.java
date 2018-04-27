@@ -41,6 +41,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         score = findViewById(R.id.Score);
     }
 
+    /**
+     * Permite usar el acelerometro.
+     * @param event event del movimiento del celular.
+     */
     @Override
     public void onSensorChanged(SensorEvent event) {
         float y = event.values[1];
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Client message = new Client();
 
         String direction = "  ";
+
         if (y > 0){
             rightImage.setImageResource(R.drawable.right2);
             leftImage.setImageResource(R.drawable.left);
@@ -70,6 +75,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             setTextViews(texto);
     }
 
+    /**
+     * Actualiza los textos de la app.
+     * @param data Informacion a actualizar.
+     */
     public void setTextViews(String data){
         Scanner str = new Scanner(data).useDelimiter("\\s*, \\s*");
 
@@ -80,6 +89,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         str.close();
     }
 
+    /**
+     * Hace que la nave dispare.
+     * @param view Argumento.
+     */
     public void onFireButton(View view){
         Client message = new Client();
         message.execute("Fire");
